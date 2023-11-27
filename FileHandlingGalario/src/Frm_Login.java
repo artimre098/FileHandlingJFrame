@@ -186,7 +186,8 @@ public class Frm_Login extends javax.swing.JFrame {
     private void txtPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusLost
         // TODO add your handling code here:
         char [] pass = txtPass.getPassword();
-        if(pass.length == 0){
+        String pass2 = new String(pass);
+        if((pass.length == 0) || pass2.equals("password")){
             txtPass.setForeground(Color.LIGHT_GRAY);
             txtPass.setText("password");
             txtPass.setEchoChar((char)0);
