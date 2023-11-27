@@ -1,3 +1,6 @@
+
+import java.awt.Color;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +17,8 @@ public class Frm_Register extends javax.swing.JFrame {
      */
     public Frm_Register() {
         initComponents();
+        txtPass.setEchoChar((char)0);
+        txtPass2.setEchoChar((char)0);
     }
 
     /**
@@ -25,37 +30,243 @@ public class Frm_Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rbSpecial = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        rbjava = new javax.swing.JRadioButton();
+        rbPython = new javax.swing.JRadioButton();
+        cmbGender = new javax.swing.JComboBox<>();
+        chk3 = new javax.swing.JCheckBox();
+        chk1 = new javax.swing.JCheckBox();
+        chk4 = new javax.swing.JCheckBox();
+        chk2 = new javax.swing.JCheckBox();
+        txtPass2 = new javax.swing.JPasswordField();
+        txtAddress = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtFirstname = new javax.swing.JTextField();
+        txtLastname = new javax.swing.JTextField();
+        txtPass = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        btnSubmit = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        LoginClick = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registration Form");
         setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setName("Register Form"); // NOI18N
 
         jLabel1.setText("Username");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         jLabel2.setText("Password");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         jLabel3.setText("Confirm Password");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jLabel4.setText("Last name:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
         jLabel5.setText("First name:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
 
-        jLabel6.setText("jLabel6");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
+        jLabel6.setText("Address:");
+
+        jLabel7.setText("Gender:");
+
+        jLabel8.setText("Skills:");
+
+        jLabel9.setText("Specialization:");
+
+        rbSpecial.add(rbjava);
+        rbjava.setText("Java");
+
+        rbSpecial.add(rbPython);
+        rbPython.setText("Python");
+
+        cmbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Others" }));
+        cmbGender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        chk3.setText("Team Lead");
+
+        chk1.setText("Programming");
+
+        chk4.setText("UI/UX Design");
+
+        chk2.setText("Visual Graphics");
+
+        txtPass2.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        txtPass2.setForeground(new java.awt.Color(204, 204, 204));
+        txtPass2.setText("confirm password");
+        txtPass2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtAddress.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        txtAddress.setForeground(new java.awt.Color(204, 204, 204));
+        txtAddress.setText("address");
+
+        txtUsername.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        txtUsername.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsername.setText("username");
+        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusLost(evt);
+            }
+        });
+
+        txtFirstname.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        txtFirstname.setForeground(new java.awt.Color(204, 204, 204));
+        txtFirstname.setText("firstname");
+
+        txtLastname.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        txtLastname.setForeground(new java.awt.Color(204, 204, 204));
+        txtLastname.setText("lastname");
+
+        txtPass.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(204, 204, 204));
+        txtPass.setText("password");
+        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel10.setText("REGISTRATION FORM");
+
+        btnSubmit.setBackground(new java.awt.Color(0, 153, 255));
+        btnSubmit.setText("Submit");
+
+        jLabel11.setText("Have an account already?");
+
+        LoginClick.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        LoginClick.setText("<html><u><font color='blue'>Log in</font></u></html>");
+        LoginClick.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbjava)
+                                .addGap(32, 32, 32)
+                                .addComponent(rbPython))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(chk1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(chk2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(chk3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chk4))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtUsername)
+                                            .addComponent(txtPass)
+                                            .addComponent(txtPass2)
+                                            .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LoginClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel10)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtPass2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(chk1)
+                    .addComponent(chk2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chk3)
+                    .addComponent(chk4))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(rbjava)
+                    .addComponent(rbPython))
+                .addGap(18, 18, 18)
+                .addComponent(btnSubmit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(LoginClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
+        // TODO add your handling code here:
+        txtUsername.setForeground(Color.black);
+        txtUsername.selectAll();
+    }//GEN-LAST:event_txtUsernameFocusGained
+
+    private void txtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusLost
+        // TODO add your handling code here:
+        txtUsername.setForeground(Color.gray);
+    }//GEN-LAST:event_txtUsernameFocusLost
 
     /**
      * @param args the command line arguments
@@ -93,11 +304,32 @@ public class Frm_Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LoginClick;
+    private javax.swing.JButton btnSubmit;
+    private javax.swing.JCheckBox chk1;
+    private javax.swing.JCheckBox chk2;
+    private javax.swing.JCheckBox chk3;
+    private javax.swing.JCheckBox chk4;
+    private javax.swing.JComboBox<String> cmbGender;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton rbPython;
+    private javax.swing.ButtonGroup rbSpecial;
+    private javax.swing.JRadioButton rbjava;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtFirstname;
+    private javax.swing.JTextField txtLastname;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JPasswordField txtPass2;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
