@@ -1,5 +1,13 @@
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -152,6 +160,7 @@ public class Frm_Login extends javax.swing.JFrame {
 
     private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
         // TODO add your handling code here:
+        lblWarning.setText("");
         txtUser.setForeground(Color.black);
         txtUser.selectAll();
     }//GEN-LAST:event_txtUserFocusGained
@@ -176,6 +185,7 @@ public class Frm_Login extends javax.swing.JFrame {
 
     private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
         // TODO add your handling code here:
+        lblWarning.setText("");
         txtPass.setForeground(Color.black);
         txtPass.selectAll();
         if(!chkShow.isSelected()){
@@ -196,19 +206,70 @@ public class Frm_Login extends javax.swing.JFrame {
     private boolean formValidation(){
         String user = txtUser.getText().trim();
         String pass = new String(txtPass.getPassword());
-        if(user.isEmpty() || pass.isEmpty()){
+        if(user.equals("username") || pass.equals("password")){
             lblWarning.setText("Sorry we could not find your account");
             return false;
-        }else{
-            lblWarning.setText("App under construction");
-            return true;
-            
         }
+            
+        return true;
+            
+        
     
     }
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        String user = txtUser.getText().trim();
+        String pass = new String(txtPass.getPassword());
+        
         if(formValidation()){
+            try {
+            
+                File f = new File(user+".txt");
+                
+                if(f.exists()){
+                        BufferedReader reader = new BufferedReader(new FileReader(f));
+                        String line, userFirst="", userLast="" , userPass = "";
+                        int count = 0;
+                        boolean ok = false;
+                        while ((line = reader.readLine()) != null) {
+                            if(count == 1 && line.equals(pass)){
+                                   ok = true;
+                                   userPass = line;
+                            }
+                            if(count == 2 && ok){
+                                   userFirst = line;
+                            }
+                            if(count == 3 && ok){
+                                   userLast = line;
+                            }
+                            count++;
+                        }
+                       // System.out.println("count: " + count);
+                        if(ok && userPass.equals(pass)){
+                            JOptionPane.showMessageDialog(
+                null,
+                "Welcome " + userFirst + " " + userLast,
+                "Successful",
+                JOptionPane.PLAIN_MESSAGE
+        );
+                            Frm_Main x = new Frm_Main();
+                        x.setUser(user,(userFirst + " " + userLast) );
+                        x.show();
+                        this.hide();
+                        }else{
+                                lblWarning.setText("Sorry we could not find your account");
+                            }
+                        reader.close();
+                        
+                        
+                }else{
+                                lblWarning.setText("Sorry we could not find your account");
+                            }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Frm_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Frm_Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
              
         }
         

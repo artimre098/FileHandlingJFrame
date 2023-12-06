@@ -407,11 +407,11 @@ public class Frm_Register extends javax.swing.JFrame {
             skills[skillCount] = "Visual Graphics";
             skillCount++;
         }
-        if(chk2.isSelected()){
+        if(chk3.isSelected()){
             skills[skillCount] = "Team Lead";
             skillCount++;
         }
-        if(chk2.isSelected()){
+        if(chk4.isSelected()){
             skills[skillCount] = "UI/UX Design";
             skillCount++;
         }
@@ -470,7 +470,7 @@ public class Frm_Register extends javax.swing.JFrame {
                             writer.write("\n");
                             String sk = "";
                             for (int x = 0 ; x < skillCount;x++){
-                                sk += skills[x] + " ";
+                                sk += skills[x] + ",";
                             }
                             writer.write(sk);
                             writer.write("\n");

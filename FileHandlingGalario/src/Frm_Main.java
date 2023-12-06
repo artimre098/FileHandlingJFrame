@@ -1,3 +1,8 @@
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,10 +17,16 @@ public class Frm_Main extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Main
      */
+    private String user;
     public Frm_Main() {
         initComponents();
+        
+        
     }
-
+    public void setUser(String user, String name){
+        this.user = user;
+        lblWelcome.setText("Welcome " + name);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +43,7 @@ public class Frm_Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblWelcome.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        lblWelcome.setText("jLabel1");
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         btnLogin.setBackground(new java.awt.Color(0, 153, 255));
         btnLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -89,12 +100,22 @@ public class Frm_Main extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        Frm_Details x = new Frm_Details();
+        try {
+            x.setData(user);
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        x.show();
         
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
         // TODO add your handling code here:
+        Frm_Login x = new Frm_Login();
+        x.show();
+        this.hide();
     }//GEN-LAST:event_btnLogin1ActionPerformed
 
     /**

@@ -1,5 +1,19 @@
 
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,6 +29,7 @@ public class Frm_Details extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Details
      */
+    private String username , password , firstname , lastname , address ,gender, skills,specialization; 
     public Frm_Details() {
         initComponents();
     }
@@ -28,6 +43,7 @@ public class Frm_Details extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSpecial = new javax.swing.ButtonGroup();
         txtLastname = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
@@ -54,10 +70,10 @@ public class Frm_Details extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtFirstname = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnChange = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtLastname.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
         txtLastname.setForeground(new java.awt.Color(204, 204, 204));
@@ -70,12 +86,11 @@ public class Frm_Details extends javax.swing.JFrame {
                 txtLastnameFocusLost(evt);
             }
         });
-        getContentPane().add(txtLastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 150, 30));
 
-        txtPass.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
-        txtPass.setForeground(new java.awt.Color(204, 204, 204));
+        txtPass.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         txtPass.setText("password");
         txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPass.setEnabled(false);
         txtPass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPassFocusGained(evt);
@@ -84,62 +99,54 @@ public class Frm_Details extends javax.swing.JFrame {
                 txtPassFocusLost(evt);
             }
         });
-        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 147, 28));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setText("User Details");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 39, 118, -1));
 
         btnSave.setBackground(new java.awt.Color(0, 153, 255));
         btnSave.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 434, 330, -1));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 51, 51));
         jLabel12.setText("*");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 93, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 51, 51));
         jLabel14.setText("*");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 163, -1, -1));
 
         jLabel9.setText("Specialization:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 386, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 51, 51));
         jLabel15.setText("*");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 188, -1, -1));
 
+        btnSpecial.add(rbjava);
         rbjava.setText("Java");
-        getContentPane().add(rbjava, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 384, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 51, 51));
         jLabel16.setText("*");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 247, -1, -1));
 
+        btnSpecial.add(rbPython);
         rbPython.setText("Python");
-        getContentPane().add(rbPython, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 384, -1, -1));
 
         cmbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Others" }));
         cmbGender.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(cmbGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 90, 30));
 
         chk3.setText("Team Lead");
-        getContentPane().add(chk3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 352, -1, -1));
 
         chk1.setText("Programming");
-        getContentPane().add(chk1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
         chk4.setText("UI/UX Design");
-        getContentPane().add(chk4, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 352, -1, -1));
 
         chk2.setText("Visual Graphics");
-        getContentPane().add(chk2, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 320, -1, -1));
 
         txtAddress.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
         txtAddress.setForeground(new java.awt.Color(204, 204, 204));
@@ -152,33 +159,25 @@ public class Frm_Details extends javax.swing.JFrame {
                 txtAddressFocusLost(evt);
             }
         });
-        getContentPane().add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 244, 150, 30));
 
         jLabel1.setText("Username");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 93, -1, -1));
 
         jLabel2.setText("Password");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
         jLabel4.setText("Last name:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
         jLabel5.setText("First name:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
 
         jLabel6.setText("Address:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 247, -1, -1));
 
         jLabel7.setText("Gender:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 282, -1, -1));
 
         jLabel8.setText("Skills:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 322, -1, -1));
 
-        txtUsername.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(204, 204, 204));
+        txtUsername.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         txtUsername.setText("username");
         txtUsername.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtUsername.setEnabled(false);
         txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtUsernameFocusGained(evt);
@@ -187,7 +186,6 @@ public class Frm_Details extends javax.swing.JFrame {
                 txtUsernameFocusLost(evt);
             }
         });
-        getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 147, 30));
 
         txtFirstname.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
         txtFirstname.setForeground(new java.awt.Color(204, 204, 204));
@@ -200,14 +198,237 @@ public class Frm_Details extends javax.swing.JFrame {
                 txtFirstnameFocusLost(evt);
             }
         });
-        getContentPane().add(txtFirstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 149, 30));
 
-        jButton1.setText("change");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+        btnChange.setText("change");
+        btnChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeActionPerformed(evt);
+            }
+        });
+
+        btnBack.setBackground(new java.awt.Color(102, 204, 255));
+        btnBack.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("Back");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabel1)
+                        .addGap(16, 16, 16)
+                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel2)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(btnChange))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel5)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel4)
+                        .addGap(13, 13, 13)
+                        .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel6)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel16))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel7)
+                        .addGap(13, 13, 13)
+                        .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(chk1)
+                        .addGap(6, 6, 6)
+                        .addComponent(chk2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(chk3)
+                        .addGap(18, 18, 18)
+                        .addComponent(chk4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel9)
+                        .addGap(12, 12, 12)
+                        .addComponent(rbjava)
+                        .addGap(32, 32, 32)
+                        .addComponent(rbPython))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel10)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel12))))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChange))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel15)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel16))))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel7))
+                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel8))
+                    .addComponent(chk1)
+                    .addComponent(chk2))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chk3)
+                    .addComponent(chk4))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel9))
+                    .addComponent(rbjava)
+                    .addComponent(rbPython))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void setData(String user) throws IOException{
+    
+         File f = new File(user +".txt");
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(f));
+                        int count = 0;
+                        
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            if(count == 0){
+                                   txtUsername.setText(line);
+                                   this.username = line;
+                            }
+                            if(count == 1 ){
+                                   txtPass.setText(line);
+                                   this.password = line;
+                            }
+                            if(count == 2){
+                                   txtFirstname.setText(line);
+                                   this.firstname = line;
+                            }
+                            if(count == 3){
+                                   txtLastname.setText(line);
+                                   this.lastname = line;
+                            }
+                            if(count == 4){
+                                   txtAddress.setText(line);
+                                   this.address = line;
+                            }
+                            if(count == 5){
+                                   cmbGender.setSelectedItem(line);
+                                   this.gender = line;
+                            }
+                            if(count == 6){
+                                   String[] values = line.split(",");
+                                   this.skills = line;
+                                   for (String value : values) {
+                                        if(value.equals("Programming")){
+                                            chk1.setSelected(true);
+                                        }
+                                        if(value.equals("Visual Graphics")){
+                                            chk2.setSelected(true);
+                                        }
+                                        if(value.equals("Team Lead")){
+                                            chk3.setSelected(true);
+                                        }
+                                        if(value.equals("UI/UX Design")){
+                                            chk4.setSelected(true);
+                                        }
+                                    }
+                            }
+                            if(count == 7){
+                                    this.specialization = line;
+                                    if(line.equals("Java")){
+                                        rbjava.setSelected(true);
+                                    }
+                                    if(line.equals("Python")){
+                                        rbPython.setSelected(true);
+                                    }
+                            }
+                            count++;
+                        }
+                        reader.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Frm_Details.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                   
+    }
     private void txtLastnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusGained
         // TODO add your handling code here:
         txtLastname.setForeground(Color.black);
@@ -287,6 +508,159 @@ public class Frm_Details extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFirstnameFocusLost
 
+    private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
+        // TODO add your handling code here:
+        JPanel panel = new JPanel();
+        JPasswordField field1 = new JPasswordField(10);
+        JPasswordField field2 = new JPasswordField(10);
+        JPasswordField field3 = new JPasswordField(10);
+
+        panel.setLayout(new GridLayout(3, 2));
+        panel.add(new JLabel("Old Password"));
+        panel.add(field1);
+        panel.add(new JLabel("New Password"));
+        panel.add(field2);
+        panel.add(new JLabel("Confirm New Password"));
+        panel.add(field3);
+
+        // Show the option pane with the panel
+        int result = JOptionPane.showConfirmDialog(
+                null,
+                panel,
+                "Enter values:",
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        // Check the user's choice
+        if (result == JOptionPane.OK_OPTION) {
+            // User clicked OK, retrieve the values
+            String oldP = new String(field1.getPassword());
+            String newP = new String(field2.getPassword());
+            String newP2 = new String(field3.getPassword());
+            
+            if(oldP.equals(this.password)){
+                
+                if(newP.equals(newP2)){
+                    
+                    if(newP.equals(this.password)){
+                        JOptionPane.showMessageDialog(null,"Old Password cannot be a new Password");
+                    }else{
+                        this.password = newP;
+                        updateData();
+                        JOptionPane.showMessageDialog(null,"Password Successfully Changed!");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Password Mismatch!");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Old Password does not match!");
+            }
+            
+        } else {
+            // User clicked Cancel or closed the dialog
+            System.out.println("User canceled the input.");
+        }
+
+        // Check the user's choice
+       
+    }//GEN-LAST:event_btnChangeActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Click Button");
+        System.out.println(this.username+".txt");
+        int skillCount = 0;
+        String cFirst = txtFirstname.getText();
+        String cLast = txtLastname.getText();
+        String cAdd = txtAddress.getText();
+        String cGender = cmbGender.getSelectedItem().toString();
+        String xSkills [] = new String [4];
+        if(chk1.isSelected()){
+            xSkills[skillCount] = "Programming";
+            skillCount++;
+        }
+        if(chk2.isSelected()){
+            xSkills[skillCount] = "Visual Graphics";
+            skillCount++;
+        }
+        if(chk3.isSelected()){
+            xSkills[skillCount] = "Team Lead";
+            skillCount++;
+        }
+        if(chk4.isSelected()){
+            xSkills[skillCount] = "UI/UX Design";
+            skillCount++;
+        }
+        String cSkill = "";
+        for (int x = 0 ; x < skillCount;x++){
+            cSkill += xSkills[x] + ",";
+        }
+        
+        String cSpecial = "";
+        if(rbjava.isSelected()){
+            cSpecial = "Java";
+        }
+        if(rbPython.isSelected()){
+            cSpecial = "Python";
+        }
+        
+        
+        try {
+            FileWriter writer = new FileWriter(this.username+".txt");
+            writer.write(username);
+            writer.write("\n");
+            writer.write(password);
+            writer.write("\n");
+            writer.write(cFirst);
+            writer.write("\n");
+            writer.write(cLast);
+            writer.write("\n");
+            writer.write(cAdd);
+            writer.write("\n");
+            writer.write(cGender);
+            writer.write("\n");
+            writer.write(cSkill);
+            writer.write("\n");
+            writer.write(cSpecial);
+            writer.write("\n");
+
+
+            writer.close();
+            JOptionPane.showMessageDialog(null, "Saved Successfully");
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Details.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                            
+    }//GEN-LAST:event_btnSaveActionPerformed
+    
+    private void updateData(){
+                            FileWriter writer;
+        try {
+            writer = new FileWriter(username+".txt");
+            writer.write(username);
+                            writer.write("\n");
+                            writer.write(password);
+                            writer.write("\n");
+                            writer.write(firstname);
+                            writer.write("\n");
+                            writer.write(lastname);
+                            writer.write("\n");
+                            writer.write(address);
+                            writer.write("\n");
+                            writer.write(gender);
+                            writer.write("\n");
+                            writer.write(skills);
+                            writer.write("\n");
+                            writer.write(specialization);
+                            writer.write("\n");
+
+
+                            writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Details.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                            
+    }
     /**
      * @param args the command line arguments
      */
@@ -323,13 +697,15 @@ public class Frm_Details extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnChange;
     private javax.swing.JButton btnSave;
+    private javax.swing.ButtonGroup btnSpecial;
     private javax.swing.JCheckBox chk1;
     private javax.swing.JCheckBox chk2;
     private javax.swing.JCheckBox chk3;
     private javax.swing.JCheckBox chk4;
     private javax.swing.JComboBox<String> cmbGender;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
