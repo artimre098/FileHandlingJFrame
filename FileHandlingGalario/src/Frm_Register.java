@@ -1,5 +1,9 @@
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,6 +22,7 @@ public class Frm_Register extends javax.swing.JFrame {
     public Frm_Register() {
         
         this.getContentPane().setBackground(new Color(203, 247, 247));
+        
         initComponents();
         txtPass.setEchoChar((char)0);
         txtPass2.setEchoChar((char)0);
@@ -66,6 +71,7 @@ public class Frm_Register extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        lblWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registration Form");
@@ -104,6 +110,11 @@ public class Frm_Register extends javax.swing.JFrame {
         chk1.setText("Programming");
 
         chk4.setText("UI/UX Design");
+        chk4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk4ActionPerformed(evt);
+            }
+        });
 
         chk2.setText("Visual Graphics");
 
@@ -188,6 +199,11 @@ public class Frm_Register extends javax.swing.JFrame {
         btnSubmit.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Have an account already?");
 
@@ -234,6 +250,10 @@ public class Frm_Register extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 51, 51));
         jLabel16.setText("*");
 
+        lblWarning.setFont(new java.awt.Font("Arial", 2, 10)); // NOI18N
+        lblWarning.setForeground(new java.awt.Color(255, 51, 51));
+        lblWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,7 +266,6 @@ public class Frm_Register extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LoginClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
@@ -295,7 +314,10 @@ public class Frm_Register extends javax.swing.JFrame {
                                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(chkShow)))))))
+                                        .addComponent(chkShow)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(26, 49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -303,7 +325,7 @@ public class Frm_Register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel10)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -351,22 +373,161 @@ public class Frm_Register extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(rbjava)
                     .addComponent(rbPython))
-                .addGap(18, 18, 18)
+                .addGap(11, 11, 11)
+                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSubmit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(LoginClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void formValidation(){
+        int skillCount = 0;
+        String username = txtUsername.getText().trim();
+        String pass = new String(txtPass.getPassword());
+        String pass2 = new String(txtPass2.getPassword());
+        String fname = txtFirstname.getText().trim();
+        String lname = txtLastname.getText().trim();
+        String address = txtAddress.getText().trim();
+        String gender = cmbGender.getSelectedItem().toString();
+        String skills [] = new String [4];
+        
+        File f = new File(username +".txt");
+        
+        if(chk1.isSelected()){
+            skills[skillCount] = "Programming";
+            skillCount++;
+        }
+        if(chk2.isSelected()){
+            skills[skillCount] = "Visual Graphics";
+            skillCount++;
+        }
+        if(chk2.isSelected()){
+            skills[skillCount] = "Team Lead";
+            skillCount++;
+        }
+        if(chk2.isSelected()){
+            skills[skillCount] = "UI/UX Design";
+            skillCount++;
+        }
+        String special = "";
+        if(rbjava.isSelected()){
+            special = "Java";
+        }
+        if(rbPython.isSelected()){
+            special = "Python";
+        }
+        
+//        System.out.println("username: " + username);
+//        System.out.println("password: " + pass);
+//        System.out.println("confirm password: " + pass2);
+//        System.out.println("firstname: " + fname);
+//        System.out.println("lastname: " + lname);
+//        System.out.println("address: " + username);
+        
+        if(isRequired()){
+            lblWarning.setText("Fill up all required Fields");
+            lblWarning.setOpaque(true);
+            lblWarning.setBackground(Color.white);
+        }else{
+            if(!(pass.equals(pass2))){
+                lblWarning.setText("Password mismatch");
+                lblWarning.setOpaque(true);
+                lblWarning.setBackground(Color.white);
+            }else if(f.exists()){
+                lblWarning.setText("Username Already Exist");
+                lblWarning.setOpaque(true);
+                lblWarning.setBackground(Color.white);
+            }else{
+                try {
+                    
+                    int result = JOptionPane.showConfirmDialog(
+                                null,
+                                "Do you want to proceed?",
+                                "Confirmation",
+                                JOptionPane.YES_NO_OPTION
+                        );
 
+                        // Check the user's choice
+                        if (result == JOptionPane.YES_OPTION) {
+                            FileWriter writer = new FileWriter(f);
+                            writer.write(username);
+                            writer.write("\n");
+                            writer.write(pass);
+                            writer.write("\n");
+                            writer.write(fname);
+                            writer.write("\n");
+                            writer.write(lname);
+                            writer.write("\n");
+                            writer.write(address);
+                            writer.write("\n");
+                            writer.write(gender);
+                            writer.write("\n");
+                            String sk = "";
+                            for (int x = 0 ; x < skillCount;x++){
+                                sk += skills[x] + " ";
+                            }
+                            writer.write(sk);
+                            writer.write("\n");
+                            writer.write(special);
+                            writer.write("\n");
+
+
+                            writer.close();
+                            JOptionPane.showMessageDialog(null, "Registered Successfully");
+                            setDefault();
+                        } else {
+                            
+                        }
+                    
+                } catch (IOException e) {
+                    e.printStackTrace();
+        }
+            }
+        }
+        
+    }
+    
+    private void setDefault(){
+        txtUsername.setText("");
+        
+    }
+    private boolean isRequired(){
+        String username = txtUsername.getText().trim();
+        String pass = new String(txtPass.getPassword());
+        String pass2 = new String(txtPass2.getPassword());
+        String fname = txtFirstname.getText().trim();
+        String lname = txtLastname.getText().trim();
+        
+        if(username.equals("username")){
+            return true;
+        }else if(pass.equals("password")){
+            return true;
+        }else if(pass2.equals("confirm password")){
+            return true;
+        }else if(fname.equals("firstname")){
+            return true;
+        }else if(lname.equals("lastname")){
+            return true;
+        }
+        
+        return false;
+    }
+    private void setWarning(){
+        lblWarning.setText("");
+        lblWarning.setOpaque(false);
+    }
     private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
         // TODO add your handling code here:
+        setWarning();
         txtUsername.setForeground(Color.black);
         txtUsername.selectAll();
+        
     }//GEN-LAST:event_txtUsernameFocusGained
 
     private void txtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusLost
@@ -381,6 +542,7 @@ public class Frm_Register extends javax.swing.JFrame {
 
     private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
         // TODO add your handling code here:
+        setWarning();
         txtPass.setForeground(Color.black);
         txtPass.selectAll();
         if(!chkShow.isSelected()){
@@ -418,6 +580,7 @@ public class Frm_Register extends javax.swing.JFrame {
 
     private void txtPass2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPass2FocusGained
         // TODO add your handling code here:
+        setWarning();
         txtPass2.setForeground(Color.black);
         txtPass2.selectAll();
         if(!chkShow.isSelected()){
@@ -437,6 +600,7 @@ public class Frm_Register extends javax.swing.JFrame {
 
     private void txtFirstnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFirstnameFocusGained
         // TODO add your handling code here:
+        setWarning();
         txtFirstname.setForeground(Color.black);
         txtFirstname.selectAll();
     }//GEN-LAST:event_txtFirstnameFocusGained
@@ -452,6 +616,7 @@ public class Frm_Register extends javax.swing.JFrame {
 
     private void txtLastnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusGained
         // TODO add your handling code here:
+        setWarning();
         txtLastname.setForeground(Color.black);
         txtLastname.selectAll();
     }//GEN-LAST:event_txtLastnameFocusGained
@@ -467,6 +632,7 @@ public class Frm_Register extends javax.swing.JFrame {
 
     private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
         // TODO add your handling code here:
+        setWarning();
         txtAddress.setForeground(Color.black);
         txtAddress.selectAll();
     }//GEN-LAST:event_txtAddressFocusGained
@@ -486,6 +652,15 @@ public class Frm_Register extends javax.swing.JFrame {
         x.show();
         this.hide();
     }//GEN-LAST:event_LoginClickMouseClicked
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        formValidation();
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void chk4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chk4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -547,6 +722,7 @@ public class Frm_Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblWarning;
     private javax.swing.JRadioButton rbPython;
     private javax.swing.ButtonGroup rbSpecial;
     private javax.swing.JRadioButton rbjava;
